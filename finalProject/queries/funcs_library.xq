@@ -1,6 +1,9 @@
 module namespace funcs = "com.funcs.my.index";
 
-
+(: 
+Inputs: String "Renovado" || "Novo" || "Usado" || "Em construção" || "Para Recuperar"
+Returns all the houses with the input condition
+:)
 declare function funcs:houses-by-condition($condition as xs:string, $INPUT) as element()*
 {
   (:let $abc := fn:exists($INPUT//*:house_condition):)
@@ -16,7 +19,12 @@ declare function funcs:houses-by-condition($condition as xs:string, $INPUT) as e
   return $e
   return $abc
 };
-
+(:
+Inputs: Double area , Int bigger-lesser = 0 or 1
+                                          case 0: >= area
+                                          case 1: <= area
+Returns all the houses with bigger or lesser than input area
+:)
 declare function funcs:houses-by-area($area as xs:double, $bigger-lesser as xs:integer, $INPUT) as element()*
 {    
  let $abc :=  if(fn:exists($INPUT//*:effective_area)) then 
@@ -30,6 +38,10 @@ declare function funcs:houses-by-area($area as xs:double, $bigger-lesser as xs:i
     return $abc
 };
 
+(:
+  inputs: string num = 1 | 2 | 3 | 4 ou mais
+  returns all the houses with num bathrooms
+:)
 declare function funcs:houses-by-bathrooms($num, $INPUT) as element()*
 {    
  let $abc :=  if(fn:exists($INPUT//*:effective_area)) then 
@@ -45,6 +57,10 @@ declare function funcs:houses-by-bathrooms($num, $INPUT) as element()*
     return $abc
 };
 
+(:
+Input string certificate = "([a-gA-G](\+|-)?)|(Isento)"
+returns all the houses with the input certificate
+:)
 declare function funcs:houses-by-certificate($certificate, $INPUT) as element()*
 {    
  let $abc :=  if(fn:exists($INPUT//*:effective_area)) then 
@@ -60,6 +76,10 @@ return $e
     return $abc
 };
 
+(:
+  Inputs: String type = "buy"| "rent" | "vacation"
+  Returns all the houses with input type
+:)
 declare function funcs:houses-by-listing-type($type, $INPUT) as element()*
 {    
  let $abc :=  if(fn:exists($INPUT//*:effective_area)) then 
@@ -75,6 +95,10 @@ return $e
     return $abc
 };
 
+(:
+  Inputs: double price-low, price-high
+  Returns all the houses in the defined range
+:)
 declare function funcs:houses-by-price-range($price-low as xs:double, $price-high as xs:double, $INPUT) as element()*
 {    
  let $abc :=  if(fn:exists($INPUT//*:effective_area)) then 
@@ -88,6 +112,10 @@ declare function funcs:houses-by-price-range($price-low as xs:double, $price-hig
     return $abc
 };
 
+(:
+  Inputs: String region = "Some District"
+  Returns all the houses in the input region
+:)
 declare function funcs:houses-by-region($region, $INPUT) as element()*
 {    
  let $abc :=  if(fn:exists($INPUT//*:effective_area)) then 
@@ -103,6 +131,10 @@ return $e
     return $abc
 };
 
+(:
+  Inputs: byte rooms
+  Returns all the houses with the input number of rooms
+:)
 declare function funcs:houses-by-rooms($rooms, $INPUT) as element()*
 {    
  let $abc :=  if(fn:exists($INPUT//*:effective_area)) then 
@@ -118,7 +150,12 @@ return $e
     return $abc
 };
 
-(:Houses by characteristics:)
+(:
+Houses by characteristics
+Inputs int type = 0 or 1
+                  case 0: returns all the "Não mobilado" houses
+                  case 1: returns all the "Mobilado" houses
+:)
 declare function funcs:houses-by-characteristics($type, $INPUT) as element()*
 {
   let $zzz := if(fn:exists($INPUT//*:house_condition)) then 
@@ -148,7 +185,11 @@ return $abc
   return $zzz
 };
 
-declare function funcs:houses-by-type($type as xs:string, $INPUT) as element()*
+(:
+Inputs type: case '0': returns all "moradias"
+             case '1': returns all "apartments"
+:)
+declare function funcs:houses-by-type($type, $INPUT) as element()*
 {
   (:let $abc := fn:exists($INPUT//*:house_condition):)
   let $zzz := if(fn:exists($INPUT//*:house_condition)) then 
@@ -176,5 +217,14 @@ else
   return $e
 return $abc
   return $zzz
+};
+
+(: Returns all the houses data set:)
+declare function funcs:get-all-data()
+{
+  for $e in collection('imovirtual')//*:items//*:item
+
+return $e
+
 };
 
