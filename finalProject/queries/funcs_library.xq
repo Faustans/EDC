@@ -10,7 +10,7 @@ declare function funcs:houses-by-condition($condition as xs:string, $INPUT) as e
   order by $e//*:house_cost
   return $e
   else
-  for $e in db:open('imovirtual')//*:items//*:item
+  for $e in collection('imovirtual')//*:items//*:item
   where (contains($e//*:house_condition,$condition))
   order by $e//*:house_cost
   return $e
@@ -24,7 +24,7 @@ declare function funcs:houses-by-area($area as xs:double, $bigger-lesser as xs:i
     where ((($e//*:effective_area >= $area) and ($bigger-lesser=0)) or ((($e//*:effective_area <= $area) and ($bigger-lesser=1))))
     return $e
    else
-     for $e in collection('../../basex/data/imovirtual')//*:items//*:item
+     for $e in collection('imovirtual')//*:items//*:item
     where ((($e//*:effective_area >= $area) and ($bigger-lesser=0)) or ((($e//*:effective_area <= $area) and ($bigger-lesser=1))))
     return $e
     return $abc
@@ -117,3 +117,64 @@ order by $e//*:house_cost
 return $e
     return $abc
 };
+
+(:Houses by characteristics:)
+declare function funcs:houses-by-characteristics($type, $INPUT) as element()*
+{
+  let $zzz := if(fn:exists($INPUT//*:house_condition)) then 
+  let $abc := if($type = '1') then
+  for $e in $INPUT
+    where (not (contains($e//*:house_characteristics,"Não mobilado")) and contains($e//*:house_characteristics,"Mobilado") or contains($e//*:title,"Mobilado")) or contains($e//*:listing_description,"Mobilado")
+  order by $e//*:house_cost
+  return $e
+else
+ for $e in $INPUT
+    where (contains($e//*:listing_description,"Não mobilado") or contains($e//*:title,"Não Mobilado") or contains($e//*:house_characteristics,"Não Mobilado"))
+  order by $e//*:house_cost
+  return $e
+return $abc
+  else
+  let $abc := if($type = '1') then
+  for $e in collection('imovirtual')//*:items//*:item
+    where (not (contains($e//*:house_characteristics,"Não mobilado")) and contains($e//*:house_characteristics,"Mobilado") or contains($e//*:title,"Mobilado")) or contains($e//*:listing_description,"Mobilado")
+  order by $e//*:house_cost
+  return $e
+else
+ for $e in collection('imovirtual')//*:items//*:item
+    where (contains($e//*:listing_description,"Não mobilado") or contains($e//*:title,"Não Mobilado") or contains($e//*:house_characteristics,"Não Mobilado"))
+  order by $e//*:house_cost
+  return $e
+return $abc
+  return $zzz
+};
+
+declare function funcs:houses-by-type($type as xs:string, $INPUT) as element()*
+{
+  (:let $abc := fn:exists($INPUT//*:house_condition):)
+  let $zzz := if(fn:exists($INPUT//*:house_condition)) then 
+  let $abc := if($type = '1') then
+  for $e in $INPUT
+    where ((contains(lower-case($e//*:house_characteristics),"apartamento")and not(contains(lower-case($e//*:house_characteristics),"moradia"))) or (contains(lower-case($e//*:title),"apartamento")and not(contains(lower-case($e//*:title),"moradia"))) or (contains(lower-case($e//*:listing_description),"apartamento")and not(contains(lower-case($e//*:listing_description),"moradia"))))
+  order by $e//*:house_cost
+  return $e
+else
+ for $e in $INPUT
+     where ((contains(lower-case($e//*:house_characteristics),"moradia")and not(contains(lower-case($e//*:house_characteristics),"apartamento"))) or (contains(lower-case($e//*:title),"moradia")and not(contains(lower-case($e//*:title),"apartamento"))) or (contains(lower-case($e//*:listing_description),"moradia")and not(contains(lower-case($e//*:listing_description),"apartamento"))))
+  order by $e//*:house_cost
+  return $e
+return $abc
+  else
+  let $abc := if($type = '1') then
+  for $e in collection('imovirtual')//*:items//*:item
+    where ((contains(lower-case($e//*:house_characteristics),"apartamento")and not(contains(lower-case($e//*:house_characteristics),"moradia"))) or (contains(lower-case($e//*:title),"apartamento")and not(contains(lower-case($e//*:title),"moradia"))) or (contains(lower-case($e//*:listing_description),"apartamento")and not(contains(lower-case($e//*:listing_description),"moradia"))))
+  order by $e//*:house_cost
+  return $e
+else
+ for $e in collection('imovirtual')//*:items//*:item
+     where ((contains(lower-case($e//*:house_characteristics),"moradia")and not(contains(lower-case($e//*:house_characteristics),"apartamento"))) or (contains(lower-case($e//*:title),"moradia")and not(contains(lower-case($e//*:title),"apartamento"))) or (contains(lower-case($e//*:listing_description),"moradia")and not(contains(lower-case($e//*:listing_description),"apartamento"))))
+  order by $e//*:house_cost
+  return $e
+return $abc
+  return $zzz
+};
+

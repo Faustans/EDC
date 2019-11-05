@@ -4,6 +4,6 @@ import module namespace funcs = "com.funcs.my.index" at "funcs_library.xq";
 (:Empty elem or function:)
 (:{ funcs:houses-by-condition("Usado",<elem></elem>)}:)
 <house>
-{ funcs:houses-by-condition("Usado",funcs:houses-by-area(100,1,<node></node>))}
+{ funcs:houses-by-type("1",funcs:houses-by-area(100,1,<node></node>))}
 
 </house>
