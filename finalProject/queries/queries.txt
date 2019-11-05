@@ -1,0 +1,33 @@
+-----Queries--------
+
+--  Filtro	--
+-Por Região																								<- DONE
+-Por Área																									<- DONE
+-Por Preço (intervalo) 																		<- DONE
+-Por Tipo Imóvel ( Apartamento/ Moradia(?)...)						 <- IMPOSSÍVEL   
+-Por T0,T1,T2,T3																					 <- DONE
+-Por cenas arrendar only																	 <- DONE
+-Mobilado ( Sim ou não) 																	 <- IMPOSSÍVEL
+-Podemos por animais idk ( depende dos dados)  						<- IMPOSSÍVEL
+-filtrar por certificado energético												<- DONE
+-Nº de divisões																						<- IMPOSSÍVEL
+-Casa de Banho (quantidade)																<- DONE
+-Condição ( Usado, Renovado, Para recuperar, Ruina)				<- DONE
+
+
+--  Adicionar 	--
+Imóvel para arrendar																			 <- TODO
+Imóvel para vender																				 <- TODO
+
+--  Remover 	--
+Imóvel																										 <-TODO
+
+
+--  Update 	--
+Info de Imóvel																						 <-TODO
+	-Mudar tipologia
+	-Mudar nº quartos
+	-...
+
+-- 
+

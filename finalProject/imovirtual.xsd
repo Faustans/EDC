@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+
+<xs:schema 
+  xmlns="http://www.w3.org"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://www.w3.org"
+  attributeFormDefault="unqualified" 
+  elementFormDefault="qualified"
+  >
+  <xs:simpleType name="num_bathrooms">  
+    <xs:restriction base="xs:short">  
+      <xs:minInclusive value="1"/>  
+      <xs:maxInclusive value="4"/>  
+    </xs:restriction>  
+  </xs:simpleType>
+  
+   <xs:simpleType name="value_house">  
+    <xs:restriction base="xs:double">  
+      <xs:minInclusive value="0"/>  
+    </xs:restriction>  
+  </xs:simpleType>
+  
+  <xs:simpleType name="certificateType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([a-gA-G](\+|-)?)|(Isento)" />
+    </xs:restriction>
+  </xs:simpleType> 
+  
+  <xs:simpleType name="houseCondition">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Renovado" />
+      <xs:enumeration value="Novo" />
+      <xs:enumeration value="Usado" />
+      <xs:enumeration value="Em construção" />
+      <xs:enumeration value="Para recuperar" />
+    </xs:restriction>
+  </xs:simpleType> 
+  
+  <xs:simpleType name="district">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Aveiro" />
+      <xs:enumeration value="Beja" />
+      <xs:enumeration value="Braga" />
+      <xs:enumeration value="Bragança" />
+      <xs:enumeration value="Castelo Branco" />
+      <xs:enumeration value="Coimbra" />
+      <xs:enumeration value="Évora" />
+      <xs:enumeration value="Faro" />
+      <xs:enumeration value="Guarda" />
+      <xs:enumeration value="Leiria" />
+      <xs:enumeration value="Lisboa" />
+      <xs:enumeration value="Portalegre" />
+      <xs:enumeration value="Porto" />
+      <xs:enumeration value="Santarém" />
+      <xs:enumeration value="Setúbal" />
+      <xs:enumeration value="Viana do Castelo" />
+      <xs:enumeration value="Vila Real" />
+      <xs:enumeration value="Viseu" />
+      <xs:enumeration value="Angra do Heroísmo" />
+      <xs:enumeration value="Funchal" />
+      <xs:enumeration value="Horta" />
+      <xs:enumeration value="Lamego" />
+      <xs:enumeration value="Ponta Delgada" />
+      <xs:enumeration value="Ilha da Madeira" />
+    </xs:restriction>
+  </xs:simpleType> 
+  
+  <xs:simpleType name="listingType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="buy" />
+      <xs:enumeration value="rent" />
+      <xs:enumeration value="vacation" />
+    </xs:restriction>
+  </xs:simpleType> 
+  
+  <xs:element name='items'>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="item" maxOccurs="unbounded" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:anyURI" name="listing_url"/>
+              <xs:element type="listingType" name="listing_type"/>
+              <xs:element type="xs:string" name="title"/>
+              <xs:element type="xs:string" name="house_location"/>
+              <xs:element type="district" name="house_district"/>
+              <xs:element name="house_cost">
+                 <xs:complexType>
+                    <xs:simpleContent>
+                     <xs:extension base="value_house">
+                     <xs:attribute name="value" type="xs:string" use="optional"/>
+                    </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:double" name="effective_area"/>
+              <xs:element type="xs:double" name="total_area" minOccurs="0"/>
+              <xs:element type="xs:byte" name="number_of_rooms"/>
+              <xs:element name="number_of_bathrooms"  minOccurs="0">
+                <xs:complexType>
+                    <xs:simpleContent>
+                     <xs:extension base="num_bathrooms">
+                     <xs:attribute name="num" type="xs:string" use="optional"/>
+                    </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+               </xs:element>
+              <xs:element type="certificateType" name="energy_certificate" minOccurs="0"/>
+              <xs:element type="houseCondition" name="house_condition" minOccurs="0"/>
+              <xs:element type="xs:gYear" name="building_year" minOccurs="0"/>
+              <xs:element name="listing_description">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                  <xs:whiteSpace value="preserve"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="house_characteristics" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="value" maxOccurs="unbounded" minOccurs="0"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="img_urls">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:anyURI" name="value" maxOccurs="unbounded" minOccurs="0"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
