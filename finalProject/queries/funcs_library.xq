@@ -139,12 +139,12 @@ declare function funcs:houses-by-rooms($rooms, $INPUT) as element()*
 {    
  let $abc :=  if(fn:exists($INPUT//*:effective_area)) then 
   for $e in $INPUT
-   where contains($e//*:number_of_rooms,$rooms)
+   where $e//*:number_of_rooms=$rooms
 order by $e//*:house_cost
 return $e
    else
    for $e in collection('imovirtual')//*:items//*:item
-where contains($e//*:number_of_rooms,$rooms)
+where $e//*:number_of_rooms=$rooms
 order by $e//*:house_cost
 return $e
     return $abc
