@@ -228,3 +228,11 @@ return $e
 
 };
 
+declare function funcs:house-by-id($id)
+{
+  for $e in collection('imovirtual')//*:items//*:item
+  where($e//*:id = $id)
+  return $e
+
+};
+
