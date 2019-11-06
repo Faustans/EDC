@@ -79,6 +79,7 @@
         <xs:element name="item" maxOccurs="unbounded" minOccurs="1">
           <xs:complexType>
             <xs:sequence>
+              <xs:element type="xs:int" name="id"/>
               <xs:element type="xs:anyURI" name="listing_url"/>
               <xs:element type="listingType" name="listing_type"/>
               <xs:element type="xs:string" name="title"/>

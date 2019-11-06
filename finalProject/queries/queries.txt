@@ -16,7 +16,7 @@
 
 
 --  Adicionar 	--
-Imóvel para arrendar																			 <- TODO
+Imóvel para arrendar																			 <- DONE
 Imóvel para vender																				 <- TODO
 
 --  Remover 	--
