@@ -236,3 +236,8 @@ declare function funcs:house-by-id($id)
 
 };
 
+declare function funcs:get-last-house-id(){
+  let $e := collection('imovirtual')//*:items//*:item//*:id
+  return $e[last()]
+};
+
