@@ -241,3 +241,12 @@ declare function funcs:get-last-house-id(){
   return $e[last()]
 };
 
+declare function funcs:get-feed-houses($page,$INPUT) as element()*
+{
+let $start := xs:integer($page) * 9 - 8
+let $end 	:= xs:integer($page) * 9
+  for $e in $INPUT
+    where (($e//*:id >= $start) and ($e//*:id <= $end))
+    return $e
+};
+
