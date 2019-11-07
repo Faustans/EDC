@@ -25,6 +25,7 @@ return insert nodes(
  <effective_area>{$area}</effective_area>
  <number_of_rooms>{$rooms}</number_of_rooms>
  <listing_description>{$description}</listing_description>
+ <house_characteristics></house_characteristics>
  <img_urls>{$imgurl}</img_urls>
   </item>
 ) as last into $e
