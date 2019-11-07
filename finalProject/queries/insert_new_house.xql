@@ -1,12 +1,16 @@
 
   let $url 			 := "" 
-  let $listtype 		 := ""
+  let $listtype 	:= ""
   let $title 		 := ""
   let $address 	 := ""
   let $district	 := ""
   let $cost			 := ""
   let $area			 := ""
   let $rooms			:= ""
+  let $bathrooms	:= ""
+  let $certificate:= ""
+  let $condition	:= ""
+  let $year			 := ""
   let $description:= ""
   let $imgurl := ""
 let $e :=  collection('imovirtual')//*:items
@@ -24,6 +28,10 @@ return insert nodes(
  <house_cost>{$cost}</house_cost>
  <effective_area>{$area}</effective_area>
  <number_of_rooms>{$rooms}</number_of_rooms>
+ <number_of_bathrooms>{$bathrooms}</number_of_bathrooms>
+ <energy_certificate>{$certificate}</energy_certificate>
+ <house_condition>{$condition}</house_condition>
+ <building_year>{$year}</building_year>
  <listing_description>{$description}</listing_description>
  <house_characteristics></house_characteristics>
  <img_urls>{$imgurl}</img_urls>
